@@ -1,0 +1,24 @@
+{
+  "name": "deep-inspect",
+  "version": "0.0.1",
+  "description": "Inspect inherited properties. Inspired by Node.js's util",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thefourtheye/deep-inspect.git"
+  },
+  "keywords": [
+    "deep",
+    "inspect",
+    "util"
+  ],
+  "author": "Sakthipriyan Vairamani <thechargingvolcano@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/thefourtheye/deep-inspect/issues"
+  },
+  "homepage": "https://github.com/thefourtheye/deep-inspect#readme"
+}
