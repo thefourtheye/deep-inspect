@@ -4,7 +4,7 @@
   "description": "Inspect inherited properties. Inspired by Node.js's util",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/tape/bin/tape tests/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
   "bugs": {
     "url": "https://github.com/thefourtheye/deep-inspect/issues"
   },
-  "homepage": "https://github.com/thefourtheye/deep-inspect#readme"
+  "homepage": "https://github.com/thefourtheye/deep-inspect#readme",
+  "devDependencies": {
+    "tape": "^4.2.0"
+  }
 }
