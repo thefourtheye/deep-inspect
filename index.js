@@ -4,7 +4,7 @@ var util = require('./util');
 
 function deepInspect(obj, options) {
   var keys,
-      i;
+    i;
 
   if (options.showHidden) {
     keys = Object.getOwnPropertyNames(obj);
@@ -16,7 +16,7 @@ function deepInspect(obj, options) {
 
 function inspect(obj, options) {
   if (util.isPrimitive(obj)) {
-    throw new TypeError('Primitives cannot be inspected');
+    return obj;
   }
 
   options = util.simpleClone(options || {});
@@ -31,7 +31,7 @@ function inspect(obj, options) {
 
   if (!util.isInteger(options.childrenDepth) || options.childrenDepth <= 0) {
     throw new TypeError(
-        'childrenDepth property must be a positive, non-zero integer');
+      'childrenDepth property must be a positive, non-zero integer');
   }
 
   options.showInherited = options.showInherited || false;
@@ -43,10 +43,12 @@ function inspect(obj, options) {
   options.inheritanceDepth = options.inheritanceDepth || 1;
 
   if (!util.isInteger(options.inheritanceDepth) ||
-      options.inheritanceDepth <= 0) {
+    options.inheritanceDepth <= 0) {
     throw new TypeError(
-        'inheritanceDepth property must be a positive, non-zero integer');
+      'inheritanceDepth property must be a positive, non-zero integer');
   }
 
   deepInspect(obj, options);
 }
+
+module.exports = inspect;
