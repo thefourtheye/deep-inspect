@@ -1,16 +1,28 @@
 var test = require('tape');
 var inspect = require('../index.js');
+var originalLogger = console.log;
+var result = '';
 
+console.log = function (data) {
+  result = data;
+};
 
-test('primitives are returned as they are', function (t) {
+function getTestResult(data) {
+  inspect(data);
+  return result;
+}
+
+test('primitives are printed as they are', function (t) {
   t.plan(9);
-  t.equal(inspect(1), 1);
-  t.equal(inspect('String data'), 'String data');
-  t.equal(inspect(3.141519), 3.141519);
-  t.equal(inspect(true), true);
-  t.equal(inspect(false), false);
-  t.notEqual(inspect(NaN), NaN);
-  t.equal(inspect(null), null);
-  t.equal(inspect(), undefined);
-  t.equal(inspect(Infinity), Infinity);
+  t.equal(getTestResult(1), 1);
+  t.equal(getTestResult('String data'), 'String data');
+  t.equal(getTestResult(3.141519), 3.141519);
+  t.equal(getTestResult(true), true);
+  t.equal(getTestResult(false), false);
+  t.notEqual(getTestResult(NaN), NaN);
+  t.equal(getTestResult(null), null);
+  t.equal(getTestResult(), undefined);
+  t.equal(getTestResult(Infinity), Infinity);
+
+  console.log = originalLogger;
 });
