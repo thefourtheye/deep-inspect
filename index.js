@@ -3,6 +3,10 @@
 var util = require('./util');
 
 function deepInspect(obj, options) {
+  if (util.isPrimitive(obj)) {
+    return console.log(obj);
+  }
+
   var keys,
     i;
 
@@ -15,10 +19,6 @@ function deepInspect(obj, options) {
 }
 
 function inspect(obj, options) {
-  if (util.isPrimitive(obj)) {
-    return obj;
-  }
-
   options = util.simpleClone(options || {});
 
   options.showHidden = options.showHidden || false;
