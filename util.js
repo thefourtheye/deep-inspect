@@ -9,11 +9,11 @@ function isObject(obj) {
 }
 
 function isBoolean(obj) {
-  return obj && toString(obj) === '[object Boolean]';
+  return toString(obj) === '[object Boolean]';
 }
 
 function isNumber(obj) {
-  return obj && toString(obj) === '[object Number]';
+  return toString(obj) === '[object Number]';
 }
 
 // Source: isaacs's core-util-is library
