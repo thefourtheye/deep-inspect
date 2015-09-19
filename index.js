@@ -1,10 +1,11 @@
 /*jslint node: true */
 
 var util = require('./util');
+var archy = require('archy');
 
 function deepInspect(obj, options) {
   if (util.isPrimitive(obj)) {
-    return console.log(obj);
+    return obj;
   }
 
   var keys,
@@ -48,7 +49,12 @@ function inspect(obj, options) {
       'inheritanceDepth property must be a positive, non-zero integer');
   }
 
-  deepInspect(obj, options);
+  var result = deepInspect(obj, options, 0);
+  if (util.isPrimitive(result)) {
+    console.log(result);
+  } else {
+    console.log(archy(result));
+  }
 }
 
 module.exports = inspect;
