@@ -8,8 +8,7 @@ function deepInspect(obj, options) {
     return obj;
   }
 
-  var keys,
-    i;
+  var keys;
 
   if (options.showHidden) {
     keys = Object.getOwnPropertyNames(obj);

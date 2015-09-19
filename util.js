@@ -63,4 +63,4 @@ module.exports = {
   isPrimitive: isPrimitive,
   isInteger: isInteger,
   simpleClone: simpleClone
-}
+};
