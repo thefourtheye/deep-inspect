@@ -23,5 +23,8 @@
   "homepage": "https://github.com/thefourtheye/deep-inspect#readme",
   "devDependencies": {
     "tape": "^4.2.0"
+  },
+  "dependencies": {
+    "archy": "^1.0.0"
   }
 }
