@@ -4,7 +4,7 @@
   "description": "Inspect inherited properties. Inspired by Node.js's util",
   "main": "index.js",
   "scripts": {
-    "lint": "./node_modules/eslint/bin/eslint.js *.js",
+    "lint": "./node_modules/eslint/bin/eslint.js *.js tests/*.js",
     "test": "npm run lint && ./node_modules/tape/bin/tape tests/**/*.js"
   },
   "repository": {
