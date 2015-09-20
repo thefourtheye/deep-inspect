@@ -3,9 +3,15 @@ var inspect = require('../index.js');
 var originalLogger = console.log;
 var result = '';
 
-console.log = function (data) {
-  result = data;
-};
+function patchLogger() {
+  console.log = function (data) {
+    result = data;
+  };
+}
+
+function restoreLogger() {
+  console.log = originalLogger;
+}
 
 function getTestResult(data) {
   inspect(data);
@@ -13,6 +19,8 @@ function getTestResult(data) {
 }
 
 test('primitives are printed as they are', function (t) {
+  patchLogger();
+
   t.plan(9);
   t.equal(getTestResult(1), 1);
   t.equal(getTestResult('String data'), 'String data');
@@ -24,5 +32,5 @@ test('primitives are printed as they are', function (t) {
   t.equal(getTestResult(), undefined);
   t.equal(getTestResult(Infinity), Infinity);
 
-  console.log = originalLogger;
+  restoreLogger();
 });

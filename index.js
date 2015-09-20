@@ -3,8 +3,8 @@
 var util = require('./util');
 var archy = require('archy');
 
-function deepInspect(obj, options) {
-  if (util.isPrimitive(obj)) {
+function deepInspect(obj, options, level) {
+  if (util.isPrimitive(obj) || level === options.childrenDepth) {
     return obj;
   }
 
@@ -16,6 +16,26 @@ function deepInspect(obj, options) {
   } else {
     keys = Object.keys(obj);
   }
+
+  if (keys.length === 0) {
+    if (util.isObject(obj)) {
+      return '{}\n';
+    }
+    if (Array.isArray(obj)) {
+      return '[]\n';
+    }
+    throw new TypeError('Unexpected type: ' + util.toString(obj));
+  }
+
+  return {
+    label: obj.toString(),
+    nodes: keys.map(function (currentKey) {
+      return {
+        label: 'Key: ' + currentKey,
+        nodes: [deepInspect(obj[currentKey], options, level + 1)]
+      };
+    })
+  };
 }
 
 function inspect(obj, options) {
@@ -27,7 +47,7 @@ function inspect(obj, options) {
     throw new TypeError('showHidden property must be a boolean');
   }
 
-  options.childrenDepth = options.childrenDepth || 2;
+  options.childrenDepth = options.childrenDepth || 1;
 
   if (!util.isInteger(options.childrenDepth) || options.childrenDepth <= 0) {
     throw new TypeError(
@@ -49,6 +69,7 @@ function inspect(obj, options) {
   }
 
   var result = deepInspect(obj, options, 0);
+
   if (util.isPrimitive(result)) {
     console.log(result);
   } else {
