@@ -31,7 +31,7 @@ function deepInspect(obj, options, level) {
     label: obj.toString(),
     nodes: keys.map(function (currentKey) {
       return {
-        label: 'Key: ' + currentKey,
+        label: 'Key: ' + util.format(currentKey),
         nodes: [deepInspect(obj[currentKey], options, level + 1)]
       };
     })

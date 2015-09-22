@@ -4,6 +4,10 @@ function toString(obj) {
   return Object.prototype.toString.call(obj);
 }
 
+function isString(obj) {
+  return obj && toString(obj) === '[object String]';
+}
+
 function isObject(obj) {
   return obj && toString(obj) === '[object Object]';
 }
@@ -14,6 +18,10 @@ function isBoolean(obj) {
 
 function isNumber(obj) {
   return toString(obj) === '[object Number]';
+}
+
+function format(obj) {
+  return isString(obj) ? '\'' + obj + '\'' : obj;
 }
 
 // Source: isaacs's core-util-is library
@@ -62,5 +70,6 @@ module.exports = {
   isNumber: isNumber,
   isPrimitive: isPrimitive,
   isInteger: isInteger,
-  simpleClone: simpleClone
+  simpleClone: simpleClone,
+  format: format
 };
