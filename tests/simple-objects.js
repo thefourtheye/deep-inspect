@@ -9,7 +9,7 @@ test('Simple objects test', function (t) {
   t.equal(util.getTestResult({}), '{}');
   t.equal(util.getTestResult({
     1: '2'
-  }), '[object Object]\n└─┬ Key: \'1\'\n  └── 2');
+  }), '[object Object]\n└─┬ Key: \'1\'\n  └── \'2\'');
 
   util.restoreLogger();
 });

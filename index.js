@@ -5,7 +5,7 @@ var archy = require('archy');
 
 function deepInspect(obj, options, level) {
   if (util.isPrimitive(obj) || level === options.childrenDepth) {
-    return obj;
+    return util.format(obj);
   }
 
   var keys;
