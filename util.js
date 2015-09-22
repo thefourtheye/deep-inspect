@@ -31,7 +31,7 @@ function isPrimitive(arg) {
     typeof arg === 'number' ||
     typeof arg === 'string' ||
     typeof arg === 'symbol' ||
-    typeof arg === 'undefined';
+    arg === undefined;
 }
 
 function isInteger(obj) {
