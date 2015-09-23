@@ -21,7 +21,7 @@ function isNumber(obj) {
 }
 
 function format(obj) {
-  return isString(obj) ? '\'' + obj + '\'' : obj;
+  return isString(obj) ? '\'' + obj + '\'' : String(obj);
 }
 
 // Source: isaacs's core-util-is library
