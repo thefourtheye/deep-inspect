@@ -24,6 +24,10 @@ function format(obj) {
   return isString(obj) ? '\'' + obj + '\'' : String(obj);
 }
 
+function getTypeName(obj) {
+  return toString(obj).replace('[object ', '').replace(']', '');
+}
+
 // Source: isaacs's core-util-is library
 function isPrimitive(arg) {
   return arg === null ||
@@ -71,5 +75,6 @@ module.exports = {
   isPrimitive: isPrimitive,
   isInteger: isInteger,
   simpleClone: simpleClone,
-  format: format
+  format: format,
+  getTypeName: getTypeName
 };

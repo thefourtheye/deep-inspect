@@ -28,7 +28,7 @@ function deepInspect(obj, options, level) {
   }
 
   return {
-    label: obj.toString(),
+    label: util.getTypeName(obj),
     nodes: keys.map(function (currentKey) {
       return {
         label: 'Key: ' + util.format(currentKey),
