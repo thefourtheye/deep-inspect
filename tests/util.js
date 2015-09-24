@@ -13,8 +13,8 @@ function restoreLogger() {
   console.log = originalLogger;
 }
 
-function getTestResult(data) {
-  inspect(data);
+function getTestResult(data, options) {
+  inspect(data, options);
   // If it is not a primitive, strip the new line at the end
   return util.isPrimitive(data) ? result : result.slice(0, -1);
 }

@@ -5,14 +5,36 @@ test('Simple objects test', function (t) {
 
   util.patchLogger();
 
-  t.plan(3);
+  t.plan(5);
+
   t.equal(util.getTestResult({}), '{}');
+
   t.equal(util.getTestResult({
     1: '2'
   }), 'Object\n└─┬ Key: \'1\'\n  └── \'2\'');
+
   t.equal(util.getTestResult({
     1: 2
   }), 'Object\n└─┬ Key: \'1\'\n  └── 2');
+
+  t.equal(util.getTestResult(Object.create(null), {
+    showHidden: true
+  }), '{}');
+
+  t.equal(util.getTestResult(util.patchLogger, {
+    showHidden: true
+  }),
+  "Function\n" +
+  "├─┬ Key: 'length'\n" +
+  "│ └── 0\n" +
+  "├─┬ Key: 'name'\n" +
+  "│ └── 'patchLogger'\n" +
+  "├─┬ Key: 'arguments'\n" +
+  "│ └── null\n" +
+  "├─┬ Key: 'caller'\n" +
+  "│ └── null\n" +
+  "└─┬ Key: 'prototype'\n" +
+  "  └── [object Object]");
 
   util.restoreLogger();
 });
