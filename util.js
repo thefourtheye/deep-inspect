@@ -21,7 +21,7 @@ function isNumber(obj) {
 }
 
 function format(obj) {
-  return isString(obj) ? '\'' + obj + '\'' : String(obj);
+  return isString(obj) ? '"' + obj + '"' : String(obj);
 }
 
 function getTypeName(obj) {

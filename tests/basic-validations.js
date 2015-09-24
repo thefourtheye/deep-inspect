@@ -6,7 +6,7 @@ test('primitives are printed as they are', function (t) {
 
   t.plan(9);
   t.equal(util.getTestResult(1), '1');
-  t.equal(util.getTestResult('String data'), '\'String data\'');
+  t.equal(util.getTestResult('String data'), '"String data"');
   t.equal(util.getTestResult(3.141519), '3.141519');
   t.equal(util.getTestResult(true), 'true');
   t.equal(util.getTestResult(false), 'false');
