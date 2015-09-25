@@ -5,7 +5,7 @@ test('Simple objects test', function (t) {
 
   util.patchLogger();
 
-  t.plan(5);
+  t.plan(6);
 
   t.equal(util.getTestResult({}), '{}');
 
@@ -35,6 +35,11 @@ test('Simple objects test', function (t) {
   '│ └── null\n' +
   '└─┬ Key: "prototype"\n' +
   '  └── [object Object]');
+
+  t.equal(util.getTestResult(Object.create(null), {
+    showHidden: true,
+    showInherited: true
+  }), '{}');
 
   util.restoreLogger();
 });

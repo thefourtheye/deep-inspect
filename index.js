@@ -32,15 +32,15 @@ function deepInspect(obj, options, cLevel, pLevel) {
   result.nodes = [];
 
   if (options.showInherited) {
-    console.error(Object.getPrototypeOf(obj));
+    // console.error(Object.getPrototypeOf(obj));
     result.nodes.push(deepInspect(Object.getPrototypeOf(obj),
-      options, cLevel + 1, pLevel + 1));
+      options, cLevel, pLevel + 1));
   }
 
   result.nodes = result.nodes.concat(keys.map(function (key) {
     return {
       label: 'Key: ' + util.format(key),
-      nodes: [deepInspect(obj[key], options, cLevel + 1, pLevel + 1)]
+      nodes: [deepInspect(obj[key], options, cLevel + 1, pLevel)]
     };
   }));
 
