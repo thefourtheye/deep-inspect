@@ -3,8 +3,9 @@
 var util = require('./util');
 var archy = require('archy');
 
-function deepInspect(obj, options, level) {
-  if (util.isPrimitive(obj) || level === options.childrenDepth) {
+function deepInspect(obj, options, cLevel, pLevel) {
+  if (util.isPrimitive(obj) || cLevel === options.childrenDepth ||
+    pLevel === options.inheritanceDepth) {
     return util.format(obj);
   }
 
@@ -26,15 +27,24 @@ function deepInspect(obj, options, level) {
     throw new TypeError('Unexpected type: ' + util.toString(obj));
   }
 
-  return {
-    label: util.getTypeName(obj),
-    nodes: keys.map(function (currentKey) {
-      return {
-        label: 'Key: ' + util.format(currentKey),
-        nodes: [deepInspect(obj[currentKey], options, level + 1)]
-      };
-    })
-  };
+  var result = {};
+  result.label = util.getTypeName(obj);
+  result.nodes = [];
+
+  if (options.showInherited) {
+    console.error(Object.getPrototypeOf(obj));
+    result.nodes.push(deepInspect(Object.getPrototypeOf(obj),
+      options, cLevel + 1, pLevel + 1));
+  }
+
+  result.nodes = result.nodes.concat(keys.map(function (key) {
+    return {
+      label: 'Key: ' + util.format(key),
+      nodes: [deepInspect(obj[key], options, cLevel + 1, pLevel + 1)]
+    };
+  }));
+
+  return result;
 }
 
 function inspect(obj, options) {
@@ -67,7 +77,7 @@ function inspect(obj, options) {
       'inheritanceDepth property must be a positive, non-zero integer');
   }
 
-  var result = deepInspect(obj, options, 0);
+  var result = deepInspect(obj, options, 0, 0);
 
   if (util.isPrimitive(result)) {
     console.log(result);
