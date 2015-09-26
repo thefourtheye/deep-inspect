@@ -1,5 +1,5 @@
-var util = require('../util.js');
-var inspect = require('../index');
+var util = require('../src/util.js');
+var inspect = require('../src/index');
 var originalLogger = console.log;
 var result = '';
 
