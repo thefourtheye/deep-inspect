@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js *.js tests/*.js",
     "test": "npm run lint && ./node_modules/tape/bin/tape tests/**/*.js",
-    "cover": "./node_modules/istanbul/lib/cli.js cover tests/**/*.js"
+    "cover": "./node_modules/istanbul/lib/cli.js cover ./node_modules/tape/bin/tape tests/**/*.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
   "devDependencies": {
     "eslint": "^1.5.0",
     "istanbul": "^0.3.21",
+    "tap": "^1.4.1",
     "tape": "^4.2.0"
   },
   "dependencies": {
