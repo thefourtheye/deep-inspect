@@ -5,9 +5,11 @@ test('Simple objects test', function (t) {
 
   util.patchLogger();
 
-  t.plan(6);
+  t.plan(7);
 
   t.equal(util.getTestResult({}), '{}');
+
+  t.equal(util.getTestResult([]), '[]');
 
   t.equal(util.getTestResult({
     1: '2'
