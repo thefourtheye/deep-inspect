@@ -6,7 +6,8 @@
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js *.js tests/*.js",
     "test": "npm run lint && npm run cover",
-    "cover": "./node_modules/istanbul/lib/cli.js cover ./node_modules/tape/bin/tape tests/**/*.js"
+    "cover": "./node_modules/istanbul/lib/cli.js cover ./node_modules/tape/bin/tape tests/**/*.js && npm run publish-coverage-information",
+    "publish-coverage-information": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   },
   "homepage": "https://github.com/thefourtheye/deep-inspect#readme",
   "devDependencies": {
+    "coveralls": "^2.11.4",
     "eslint": "^1.5.0",
     "istanbul": "^0.3.21",
     "tap": "^1.4.1",
