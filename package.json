@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js *.js tests/*.js",
-    "test": "npm run lint && npm run cover",
-    "cover": "./node_modules/istanbul/lib/cli.js cover ./node_modules/tape/bin/tape tests/**/*.js && npm run publish-coverage-information",
+    "test": "npm run lint && npm run cover && npm run publish-coverage-information",
+    "test-dev": "npm run lint && npm run cover",
+    "cover": "./node_modules/istanbul/lib/cli.js cover ./node_modules/tape/bin/tape tests/**/*.js",
     "publish-coverage-information": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "repository": {

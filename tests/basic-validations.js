@@ -17,3 +17,34 @@ test('primitives are printed as they are', function (t) {
 
   util.restoreLogger();
 });
+
+test('invalid data should throw', function (t) {
+  t.plan(4);
+
+  t.throws(function () {
+    util.getTestResult(1, 1);
+  },
+  /^TypeError: Object to be cloned must be an Object$/);
+
+  t.throws(function () {
+    util.getTestResult(1, {
+      showHidden: 1
+    });
+  },
+  /^TypeError: showHidden property must be a boolean$/);
+
+  t.throws(function () {
+    util.getTestResult(1, {
+      childrenDepth: -1
+    });
+  },
+  /^TypeError: childrenDepth property must be a positive, non-zero integer$/);
+
+  t.throws(function () {
+    util.getTestResult(1, {
+      showInherited: 1
+    });
+  },
+  /^TypeError: showInherited property must be a boolean$/);
+
+});
