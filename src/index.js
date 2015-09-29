@@ -13,7 +13,7 @@ function deepInspect(obj, options, cLevel, pLevel) {
 
   if (options.showHidden) {
     keys = Object.getOwnPropertyNames(obj);
-    if (util.isFunction(Object.getOwnPropertySymbols)) {
+    if (util.hasSymbolsSupport) {
       keys = keys.concat(Object.getOwnPropertySymbols(obj));
     }
   } else {
@@ -35,7 +35,6 @@ function deepInspect(obj, options, cLevel, pLevel) {
   result.nodes = [];
 
   if (options.showInherited) {
-    // console.error(Object.getPrototypeOf(obj));
     result.nodes.push(deepInspect(Object.getPrototypeOf(obj),
       options, cLevel, pLevel + 1));
   }

@@ -24,7 +24,14 @@ function isNumber(obj) {
   return toString(obj) === '[object Number]';
 }
 
+function isSymbol(obj) {
+  return toString(obj) === '[object Symbol]';
+}
+
 function format(obj) {
+  if (module.exports.hasSymbolsSupport && isSymbol(obj)) {
+    return obj.toString();
+  }
   return isString(obj) ? '"' + obj + '"' : String(obj);
 }
 
