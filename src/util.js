@@ -4,6 +4,10 @@ function toString(obj) {
   return Object.prototype.toString.call(obj);
 }
 
+function isFunction(obj) {
+  return toString(obj) === '[object Function]';
+}
+
 function isString(obj) {
   return toString(obj) === '[object String]';
 }
@@ -74,6 +78,7 @@ module.exports = {
   isNumber: isNumber,
   isPrimitive: isPrimitive,
   isInteger: isInteger,
+  isFunction: isFunction,
   simpleClone: simpleClone,
   format: format,
   getTypeName: getTypeName

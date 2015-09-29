@@ -5,7 +5,7 @@ test('Simple objects test', function (t) {
 
   util.patchLogger();
 
-  t.plan(8);
+  t.plan(10);
 
   t.equal(util.getTestResult({}), '{}');
 
@@ -46,6 +46,15 @@ test('Simple objects test', function (t) {
   t.equal(util.getTestResult({
     '': ''
   }), 'Object\n└─┬ Key: ""\n  └── ""');
+
+  var obj = {};
+  obj[Symbol('a')] = 'a';
+
+  t.equal(util.getTestResult(obj), '{}');
+
+  t.equal(util.getTestResult(obj, {
+    showHidden: true
+  }), 'Object\n└─┬ Key: Symbol(a)\n  └── "a"');
 
   util.restoreLogger();
 });
