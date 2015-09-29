@@ -13,6 +13,7 @@ function deepInspect(obj, options, cLevel, pLevel) {
 
   if (options.showHidden) {
     keys = Object.getOwnPropertyNames(obj);
+    // if (Object.getOwnPropertySymbols )
   } else {
     keys = Object.keys(obj);
   }

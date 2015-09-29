@@ -5,7 +5,7 @@ function toString(obj) {
 }
 
 function isString(obj) {
-  return obj && toString(obj) === '[object String]';
+  return toString(obj) === '[object String]';
 }
 
 function isObject(obj) {

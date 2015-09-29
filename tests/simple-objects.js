@@ -5,7 +5,7 @@ test('Simple objects test', function (t) {
 
   util.patchLogger();
 
-  t.plan(7);
+  t.plan(8);
 
   t.equal(util.getTestResult({}), '{}');
 
@@ -42,6 +42,10 @@ test('Simple objects test', function (t) {
     showHidden: true,
     showInherited: true
   }), '{}');
+
+  t.equal(util.getTestResult({
+    '': ''
+  }), 'Object\n└─┬ Key: ""\n  └── ""');
 
   util.restoreLogger();
 });
