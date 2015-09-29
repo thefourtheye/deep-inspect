@@ -22,5 +22,6 @@ function getTestResult(data, options) {
 module.exports = {
   patchLogger: patchLogger,
   restoreLogger: restoreLogger,
-  getTestResult: getTestResult
+  getTestResult: getTestResult,
+  hasSymbolsSupport: util.hasSymbolsSupport
 };

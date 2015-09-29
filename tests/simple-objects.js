@@ -5,7 +5,7 @@ test('Simple objects test', function (t) {
 
   util.patchLogger();
 
-  t.plan(10);
+  t.plan(util.hasSymbolsSupport ? 10 : 8);
 
   t.equal(util.getTestResult({}), '{}');
 
@@ -47,14 +47,16 @@ test('Simple objects test', function (t) {
     '': ''
   }), 'Object\n└─┬ Key: ""\n  └── ""');
 
-  var obj = {};
-  obj[Symbol('a')] = 'a';
+  if (util.hasSymbolsSupport) {
+    var obj = {};
+    obj[Symbol('a')] = 'a';
 
-  t.equal(util.getTestResult(obj), '{}');
+    t.equal(util.getTestResult(obj), '{}');
 
-  t.equal(util.getTestResult(obj, {
-    showHidden: true
-  }), 'Object\n└─┬ Key: Symbol(a)\n  └── "a"');
+    t.equal(util.getTestResult(obj, {
+      showHidden: true
+    }), 'Object\n└─┬ Key: Symbol(a)\n  └── "a"');
+  }
 
   util.restoreLogger();
 });

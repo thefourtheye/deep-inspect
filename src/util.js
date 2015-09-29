@@ -81,5 +81,6 @@ module.exports = {
   isFunction: isFunction,
   simpleClone: simpleClone,
   format: format,
-  getTypeName: getTypeName
+  getTypeName: getTypeName,
+  hasSymbolsSupport: isFunction(Symbol)
 };
