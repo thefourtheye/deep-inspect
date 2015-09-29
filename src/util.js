@@ -78,6 +78,18 @@ function simpleClone(obj, target) {
   return target;
 }
 
+var hasSymbolsSupport = true;
+
+try {
+  hasSymbolsSupport = typeof Symbol && isFunction(Symbol);
+} catch (ex) {
+  if (ex instanceof ReferenceError) {
+    hasSymbolsSupport = false;
+  } else {
+    throw ex;
+  }
+}
+
 module.exports = {
   toString: toString,
   isObject: isObject,
@@ -89,5 +101,5 @@ module.exports = {
   simpleClone: simpleClone,
   format: format,
   getTypeName: getTypeName,
-  hasSymbolsSupport: isFunction(Symbol)
+  hasSymbolsSupport: hasSymbolsSupport
 };
