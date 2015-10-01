@@ -5,7 +5,7 @@ test('Simple objects test', function (t) {
 
   util.patchLogger();
 
-  t.plan(util.hasSymbolsSupport ? 10 : 8);
+  t.plan(util.hasSymbolsSupport ? 11 : 9);
 
   t.equal(util.getTestResult({}), '{}');
 
@@ -57,6 +57,11 @@ test('Simple objects test', function (t) {
       showHidden: true
     }), 'Object\n└─┬ Key: Symbol(a)\n  └── "a"');
   }
+
+  t.throws(function () {
+    util.getTestResult(String);
+  },
+  /^TypeError: Unexpected type: \[object Function\]$/);
 
   util.restoreLogger();
 });
