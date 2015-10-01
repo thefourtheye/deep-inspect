@@ -58,10 +58,7 @@ test('Simple objects test', function (t) {
     }), 'Object\n└─┬ Key: Symbol(a)\n  └── "a"');
   }
 
-  t.throws(function () {
-    util.getTestResult(String);
-  },
-  /^TypeError: Unexpected type: \[object Function\]$/);
+  t.equal(util.getTestResult(String), '[Function "String"]');
 
   util.restoreLogger();
 });
