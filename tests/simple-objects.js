@@ -52,21 +52,21 @@ test('Simple objects test', function (t) {
     Infinity
   ]),
   'Array\n' +
-  '├─┬ Key: "0"\n' +
+  '├─┬ Index: "0"\n' +
   '│ └── 1\n' +
-  '├─┬ Key: "1"\n' +
+  '├─┬ Index: "1"\n' +
   '│ └── "a"\n' +
-  '├─┬ Key: "2"\n' +
+  '├─┬ Index: "2"\n' +
   '│ └── true\n' +
-  '├─┬ Key: "3"\n' +
+  '├─┬ Index: "3"\n' +
   '│ └── undefined\n' +
-  '├─┬ Key: "4"\n' +
+  '├─┬ Index: "4"\n' +
   '│ └── null\n' +
-  '├─┬ Key: "5"\n' +
+  '├─┬ Index: "5"\n' +
   '│ └── 3.14\n' +
-  '├─┬ Key: "6"\n' +
+  '├─┬ Index: "6"\n' +
   '│ └── NaN\n' +
-  '└─┬ Key: "7"\n' +
+  '└─┬ Index: "7"\n' +
   '  └── Infinity');
 
   util.restoreLogger();

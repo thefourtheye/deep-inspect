@@ -42,9 +42,11 @@ function deepInspect(obj, options, cLevel, pLevel) {
       options, cLevel, pLevel + 1));
   }
 
+  var title = Array.isArray(obj) ? 'Index: ' : 'Key: ';
+
   result.nodes = result.nodes.concat(keys.map(function (key) {
     return {
-      label: 'Key: ' + util.format(key),
+      label: title + util.format(key),
       nodes: [deepInspect(obj[key], options, cLevel + 1, pLevel)]
     };
   }));
