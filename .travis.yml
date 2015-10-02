@@ -6,3 +6,4 @@ node_js:
   - "4.0.0"
   - "iojs"
   - "iojs-v3.0.0"
+script: npm run test-on-travis
