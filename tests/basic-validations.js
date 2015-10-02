@@ -23,35 +23,30 @@ test('invalid data should throw', function (t) {
 
   t.throws(function () {
     util.getTestResult(1, 1);
-  },
-  /^TypeError: Object to be cloned must be an Object$/);
+  }, /Object to be cloned must be an Object/);
 
   t.throws(function () {
     util.getTestResult(1, {
       showHidden: 1
     });
-  },
-  /^TypeError: showHidden property must be a boolean$/);
+  }, /showHidden property must be a boolean/);
 
   t.throws(function () {
     util.getTestResult(1, {
       childrenDepth: -1
     });
-  },
-  /^TypeError: childrenDepth property must be a positive, non-zero integer$/);
+  }, /childrenDepth property must be a positive, non-zero integer/);
 
   t.throws(function () {
     util.getTestResult(1, {
       showInherited: 1
     });
-  },
-  /^TypeError: showInherited property must be a boolean$/);
+  }, /showInherited property must be a boolean/);
 
   t.throws(function () {
     util.getTestResult(1, {
       inheritanceDepth: -1
     });
-  },
-  /^TypeError: inheritanceDepth property must be a positive, non-zero integer$/);
+  }, /inheritanceDepth property must be a positive, non-zero integer/);
 
 });

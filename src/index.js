@@ -1,11 +1,9 @@
-/*jslint node: true */
-
 var util = require('./util');
 var archy = require('archy');
 
 function deepInspect(obj, options, cLevel, pLevel) {
   if (util.isPrimitive(obj) || cLevel === options.childrenDepth ||
-    pLevel === options.inheritanceDepth) {
+    (options.showInherited && pLevel === options.inheritanceDepth)) {
     return util.format(obj);
   }
 

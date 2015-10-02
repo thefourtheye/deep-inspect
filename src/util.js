@@ -28,13 +28,6 @@ function isSymbol(obj) {
   return toString(obj) === '[object Symbol]';
 }
 
-function format(obj) {
-  if (module.exports.hasSymbolsSupport && isSymbol(obj)) {
-    return obj.toString();
-  }
-  return isString(obj) ? '"' + obj + '"' : String(obj);
-}
-
 function getTypeName(obj) {
   return toString(obj).replace('[object ', '').replace(']', '');
 }
@@ -88,6 +81,18 @@ try {
   } else {
     throw ex;
   }
+}
+
+function format(obj) {
+  if (isPrimitive(obj)) {
+    return isString(obj) ? '"' + obj + '"' : String(obj);
+  }
+
+  if (module.exports.hasSymbolsSupport && isSymbol(obj)) {
+    return obj.toString();
+  }
+
+  return toString(obj);
 }
 
 module.exports = {
