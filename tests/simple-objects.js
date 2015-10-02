@@ -12,28 +12,37 @@ test('Simple objects test', function (t) {
 
   t.equal(util.getTestResult({
     1: '2'
-  }), 'Object\n└─┬ Key: "1"\n  └── "2"');
+  }), [
+    'Object',
+    '└─┬ Key: "1"',
+    '  └── "2"'
+  ].join('\n'));
 
   t.equal(util.getTestResult({
     1: 2
-  }), 'Object\n└─┬ Key: "1"\n  └── 2');
+  }), [
+    'Object',
+    '└─┬ Key: "1"',
+    '  └── 2'
+  ].join('\n'));
 
   t.equal(util.getTestResult(Object.create(null), {
     showHidden: true
   }), '{}');
 
-  t.equal(util.getTestResult(util.patchLogger, {showHidden: true}),
-    'Function\n' +
-    '├─┬ Key: "length"\n' +
-    '│ └── 0\n' +
-    '├─┬ Key: "name"\n' +
-    '│ └── "patchLogger"\n' +
-    '├─┬ Key: "arguments"\n' +
-    '│ └── null\n' +
-    '├─┬ Key: "caller"\n' +
-    '│ └── null\n' +
-    '└─┬ Key: "prototype"\n' +
-    '  └── [object Object]');
+  t.equal(util.getTestResult(util.patchLogger, {showHidden: true}), [
+    'Function',
+    '├─┬ Key: "length"',
+    '│ └── 0',
+    '├─┬ Key: "name"',
+    '│ └── "patchLogger"',
+    '├─┬ Key: "arguments"',
+    '│ └── null',
+    '├─┬ Key: "caller"',
+    '│ └── null',
+    '└─┬ Key: "prototype"',
+    '  └── [object Object]'
+  ].join('\n'));
 
   t.equal(util.getTestResult(Object.create(null), {
     showHidden: true,
@@ -42,30 +51,35 @@ test('Simple objects test', function (t) {
 
   t.equal(util.getTestResult({
     '': ''
-  }), 'Object\n└─┬ Key: ""\n  └── ""');
+  }), [
+    'Object',
+    '└─┬ Key: ""',
+    '  └── ""'
+  ].join('\n'));
 
   t.equal(util.getTestResult(String), '[Function "String"]');
 
   t.equal(util.getTestResult([1, 'a', true, undefined, null, 3.14, NaN,
       Infinity
-    ]),
-    'Array\n' +
-    '├─┬ Index: "0"\n' +
-    '│ └── 1\n' +
-    '├─┬ Index: "1"\n' +
-    '│ └── "a"\n' +
-    '├─┬ Index: "2"\n' +
-    '│ └── true\n' +
-    '├─┬ Index: "3"\n' +
-    '│ └── undefined\n' +
-    '├─┬ Index: "4"\n' +
-    '│ └── null\n' +
-    '├─┬ Index: "5"\n' +
-    '│ └── 3.14\n' +
-    '├─┬ Index: "6"\n' +
-    '│ └── NaN\n' +
-    '└─┬ Index: "7"\n' +
-    '  └── Infinity');
+    ]), [
+      'Array',
+      '├─┬ Index: "0"',
+      '│ └── 1',
+      '├─┬ Index: "1"',
+      '│ └── "a"',
+      '├─┬ Index: "2"',
+      '│ └── true',
+      '├─┬ Index: "3"',
+      '│ └── undefined',
+      '├─┬ Index: "4"',
+      '│ └── null',
+      '├─┬ Index: "5"',
+      '│ └── 3.14',
+      '├─┬ Index: "6"',
+      '│ └── NaN',
+      '└─┬ Index: "7"',
+      '  └── Infinity'
+    ].join('\n'));
 
   util.restoreLogger();
 });
@@ -96,53 +110,59 @@ test('Simple nested objects test', function (t) {
 
   t.plan(6);
 
-  t.equal(util.getTestResult([1, [2, 3]]),
-    'Array\n' +
-    '├─┬ Index: "0"\n' +
-    '│ └── 1\n' +
-    '└─┬ Index: "1"\n' +
-    '  └── [object Array]');
+  t.equal(util.getTestResult([1, [2, 3]]), [
+    'Array',
+    '├─┬ Index: "0"',
+    '│ └── 1',
+    '└─┬ Index: "1"',
+    '  └── [object Array]'
+  ].join('\n'));
 
-  t.equal(util.getTestResult({1: {2: 3}}),
-    'Object\n' +
-    '└─┬ Key: "1"\n' +
-    '  └── [object Object]');
+  t.equal(util.getTestResult({1: {2: 3}}), [
+    'Object',
+    '└─┬ Key: "1"',
+    '  └── [object Object]'
+  ].join('\n'));
 
-  t.equal(util.getTestResult([1, [2, 3]], {childrenDepth: 2}),
-    'Array\n' +
-    '├─┬ Index: "0"\n' +
-    '│ └── 1\n' +
-    '└─┬ Index: "1"\n' +
-    '  └─┬ Array\n' +
-    '    ├─┬ Index: "0"\n' +
-    '    │ └── 2\n' +
-    '    └─┬ Index: "1"\n' +
-    '      └── 3');
+  t.equal(util.getTestResult([1, [2, 3]], {childrenDepth: 2}), [
+    'Array',
+    '├─┬ Index: "0"',
+    '│ └── 1',
+    '└─┬ Index: "1"',
+    '  └─┬ Array',
+    '    ├─┬ Index: "0"',
+    '    │ └── 2',
+    '    └─┬ Index: "1"',
+    '      └── 3'
+  ].join('\n'));
 
-  t.equal(util.getTestResult({1: {2: 3}}, {childrenDepth: 2}),
-    'Object\n' +
-    '└─┬ Key: "1"\n' +
-    '  └─┬ Object\n' +
-    '    └─┬ Key: "2"\n' +
-    '      └── 3');
+  t.equal(util.getTestResult({1: {2: 3}}, {childrenDepth: 2}), [
+    'Object',
+    '└─┬ Key: "1"',
+    '  └─┬ Object',
+    '    └─┬ Key: "2"',
+    '      └── 3'
+  ].join('\n'));
 
-  t.equal(util.getTestResult([1, {2: 3}], {childrenDepth: 2}),
-    'Array\n' +
-    '├─┬ Index: "0"\n' +
-    '│ └── 1\n' +
-    '└─┬ Index: "1"\n' +
-    '  └─┬ Object\n' +
-    '    └─┬ Key: "2"\n' +
-    '      └── 3');
+  t.equal(util.getTestResult([1, {2: 3}], {childrenDepth: 2}), [
+    'Array',
+    '├─┬ Index: "0"',
+    '│ └── 1',
+    '└─┬ Index: "1"',
+    '  └─┬ Object',
+    '    └─┬ Key: "2"',
+    '      └── 3'
+  ].join('\n'));
 
-  t.equal(util.getTestResult({1: [2, 3]}, {childrenDepth: 2}),
-    'Object\n' +
-    '└─┬ Key: "1"\n' +
-    '  └─┬ Array\n' +
-    '    ├─┬ Index: "0"\n' +
-    '    │ └── 2\n' +
-    '    └─┬ Index: "1"\n' +
-    '      └── 3');
+  t.equal(util.getTestResult({1: [2, 3]}, {childrenDepth: 2}), [
+    'Object',
+    '└─┬ Key: "1"',
+    '  └─┬ Array',
+    '    ├─┬ Index: "0"',
+    '    │ └── 2',
+    '    └─┬ Index: "1"',
+    '      └── 3'
+  ].join('\n'));
 
   util.restoreLogger();
 });
