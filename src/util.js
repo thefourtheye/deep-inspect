@@ -84,12 +84,12 @@ try {
 }
 
 function format(obj) {
-  if (isPrimitive(obj)) {
-    return isString(obj) ? '"' + obj + '"' : String(obj);
-  }
-
   if (module.exports.hasSymbolsSupport && isSymbol(obj)) {
     return obj.toString();
+  }
+
+  if (isPrimitive(obj)) {
+    return isString(obj) ? '"' + obj + '"' : String(obj);
   }
 
   return toString(obj);
