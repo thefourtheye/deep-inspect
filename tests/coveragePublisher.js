@@ -8,7 +8,7 @@ if (process.env.CI) {
   var child = spawn(process.execPath, args, {
     stdio: ['pipe', 1, 2, 'ipc']
   });
-  fs.createReadStream('./coverage/lcov.info').pipe(child.stdin);
+  fs.createReadStream('../coverage/lcov.info').pipe(child.stdin);
 } else {
   console.log('Skipping publishing coverage report.');
 }
