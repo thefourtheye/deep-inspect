@@ -44,14 +44,16 @@ test('Simple objects test', function (t) {
     '  └── [object Object]'
   ].join('\n'));
 
+
   t.equal(util.getTestResult(Object.create(null), {
     showHidden: true,
-    showInherited: true
-  }), '{}');
-
-  t.equal(util.getTestResult({
-    '': ''
+    parentChainLevel: 1
   }), [
+    'Object',
+    '└── null'
+  ].join('\n'));
+
+  t.equal(util.getTestResult({'': ''}), [
     'Object',
     '└─┬ Key: ""',
     '  └── ""'
@@ -135,7 +137,7 @@ test('Simple nested objects test', function (t) {
     '  └── [object Object]'
   ].join('\n'));
 
-  t.equal(util.getTestResult([1, [2, 3]], {childrenDepth: 2}), [
+  t.equal(util.getTestResult([1, [2, 3]], {depth: 2}), [
     'Array',
     '├─┬ Index: "0"',
     '│ └── 1',
@@ -147,7 +149,7 @@ test('Simple nested objects test', function (t) {
     '      └── 3'
   ].join('\n'));
 
-  t.equal(util.getTestResult({1: {2: 3}}, {childrenDepth: 2}), [
+  t.equal(util.getTestResult({1: {2: 3}}, {depth: 2}), [
     'Object',
     '└─┬ Key: "1"',
     '  └─┬ Object',
@@ -155,7 +157,7 @@ test('Simple nested objects test', function (t) {
     '      └── 3'
   ].join('\n'));
 
-  t.equal(util.getTestResult([1, {2: 3}], {childrenDepth: 2}), [
+  t.equal(util.getTestResult([1, {2: 3}], {depth: 2}), [
     'Array',
     '├─┬ Index: "0"',
     '│ └── 1',
@@ -165,7 +167,7 @@ test('Simple nested objects test', function (t) {
     '      └── 3'
   ].join('\n'));
 
-  t.equal(util.getTestResult({1: [2, 3]}, {childrenDepth: 2}), [
+  t.equal(util.getTestResult({1: [2, 3]}, {depth: 2}), [
     'Object',
     '└─┬ Key: "1"',
     '  └─┬ Array',
@@ -176,7 +178,7 @@ test('Simple nested objects test', function (t) {
   ].join('\n'));
 
   // test with depth more than the actual
-  t.equal(util.getTestResult({1: [2, 3]}, {childrenDepth: 10}), [
+  t.equal(util.getTestResult({1: [2, 3]}, {depth: 10}), [
     'Object',
     '└─┬ Key: "1"',
     '  └─┬ Array',

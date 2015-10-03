@@ -19,7 +19,7 @@ test('primitives are printed as they are', function (t) {
 });
 
 test('invalid data should throw', function (t) {
-  t.plan(5);
+  t.plan(4);
 
   t.throws(function () {
     util.getTestResult(1, 1);
@@ -33,20 +33,14 @@ test('invalid data should throw', function (t) {
 
   t.throws(function () {
     util.getTestResult(1, {
-      childrenDepth: -1
+      depth: -1
     });
-  }, /childrenDepth property must be a positive, non-zero integer/);
+  }, /depth property must be a positive, non-zero integer/);
 
   t.throws(function () {
     util.getTestResult(1, {
-      showInherited: 1
+      parentChainLevel: -1
     });
-  }, /showInherited property must be a boolean/);
-
-  t.throws(function () {
-    util.getTestResult(1, {
-      inheritanceDepth: -1
-    });
-  }, /inheritanceDepth property must be a positive, non-zero integer/);
+  }, /parentChainLevel property must be a positive, non-zero integer/);
 
 });

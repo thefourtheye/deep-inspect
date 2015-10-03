@@ -2,8 +2,8 @@ var util = require('./util');
 var archy = require('archy');
 
 function deepInspect(obj, options, cLevel, pLevel) {
-  if (util.isPrimitive(obj) || cLevel === options.childrenDepth ||
-    (options.showInherited && pLevel === options.inheritanceDepth)) {
+  if (util.isPrimitive(obj) || cLevel === options.depth ||
+    pLevel === options.parentChainLevel) {
     return util.format(obj);
   }
 
@@ -18,7 +18,7 @@ function deepInspect(obj, options, cLevel, pLevel) {
     keys = Object.keys(obj);
   }
 
-  if (keys.length === 0) {
+  if (keys.length === 0 && !options.parentChainLevel) {
     if (util.isObject(obj)) {
       return '{}\n';
     }
@@ -35,16 +35,17 @@ function deepInspect(obj, options, cLevel, pLevel) {
   result.label = util.getTypeName(obj);
   result.nodes = [];
 
-  if (options.showInherited) {
+  if (options.parentChainLevel) {
     result.nodes.push(deepInspect(Object.getPrototypeOf(obj),
-      options, cLevel, pLevel + 1));
+      options, 0, pLevel + 1));
   }
 
   var indexRE = /^["]?\d+["]?$/;
 
   result.nodes = result.nodes.concat(keys.map(function (key) {
     var fKey = util.format(key);
-    var title = Array.isArray(obj) && indexRE.test(fKey) ? 'Index: ' : 'Key: ';
+    var title = Array.isArray(obj) && indexRE.test(fKey) ? 'Index: ' :
+      'Key: ';
     return {
       label: title + fKey,
       nodes: [deepInspect(obj[key], options, cLevel + 1, pLevel)]
@@ -63,25 +64,19 @@ function inspect(obj, options) {
     throw new TypeError('showHidden property must be a boolean');
   }
 
-  options.childrenDepth = options.childrenDepth || 1;
+  options.depth = options.depth || 1;
 
-  if (!util.isInteger(options.childrenDepth) || options.childrenDepth <= 0) {
+  if (!util.isInteger(options.depth) || options.depth <= 0) {
     throw new TypeError(
-      'childrenDepth property must be a positive, non-zero integer');
+      'depth property must be a positive, non-zero integer');
   }
 
-  options.showInherited = options.showInherited || false;
-
-  if (!util.isBoolean(options.showInherited)) {
-    throw new TypeError('showInherited property must be a boolean');
-  }
-
-  options.inheritanceDepth = options.inheritanceDepth || 1;
-
-  if (!util.isInteger(options.inheritanceDepth) ||
-    options.inheritanceDepth <= 0) {
-    throw new TypeError(
-      'inheritanceDepth property must be a positive, non-zero integer');
+  if (options.parentChainLevel !== undefined) {
+    if (!util.isInteger(options.parentChainLevel) ||
+      options.parentChainLevel <= 0) {
+      throw new TypeError(
+        'parentChainLevel property must be a positive, non-zero integer');
+    }
   }
 
   var result = deepInspect(obj, options, 0, 0);
