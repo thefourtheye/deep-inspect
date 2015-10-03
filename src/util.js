@@ -76,11 +76,7 @@ var hasSymbolsSupport = true;
 try {
   hasSymbolsSupport = typeof Symbol && isFunction(Symbol);
 } catch (ex) {
-  if (ex instanceof ReferenceError) {
-    hasSymbolsSupport = false;
-  } else {
-    throw ex;
-  }
+  hasSymbolsSupport = !(ex instanceof ReferenceError);
 }
 
 function format(obj) {
