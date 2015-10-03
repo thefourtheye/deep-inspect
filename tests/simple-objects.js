@@ -108,7 +108,7 @@ if (util.hasSymbolsSupport) {
 test('Simple nested objects test', function (t) {
   util.patchLogger();
 
-  t.plan(6);
+  t.plan(7);
 
   t.equal(util.getTestResult([1, [2, 3]]), [
     'Array',
@@ -155,6 +155,17 @@ test('Simple nested objects test', function (t) {
   ].join('\n'));
 
   t.equal(util.getTestResult({1: [2, 3]}, {childrenDepth: 2}), [
+    'Object',
+    '└─┬ Key: "1"',
+    '  └─┬ Array',
+    '    ├─┬ Index: "0"',
+    '    │ └── 2',
+    '    └─┬ Index: "1"',
+    '      └── 3'
+  ].join('\n'));
+
+  // test with depth more than the actual
+  t.equal(util.getTestResult({1: [2, 3]}, {childrenDepth: 10}), [
     'Object',
     '└─┬ Key: "1"',
     '  └─┬ Array',
