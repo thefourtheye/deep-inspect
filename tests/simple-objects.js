@@ -4,7 +4,7 @@ var util = require('./util');
 test('Simple objects test', function (t) {
   util.patchLogger();
 
-  t.plan(11);
+  t.plan(13);
 
   t.equal(util.getTestResult({}), '{}');
 
@@ -93,6 +93,10 @@ test('Simple objects test', function (t) {
     '└─┬ Key: "length"',
     '  └── 2'
   ].join('\n'));
+
+  t.equal(util.getTestResult(/abcd/), '[object RegExp]');
+
+  t.equal(util.getTestResult(new Date()), '[object Date]');
 
   util.restoreLogger();
 });

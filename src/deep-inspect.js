@@ -27,7 +27,7 @@ function deepInspect(obj, options, cLevel, pLevel) {
     if (util.isFunction(obj)) {
       return '[Function "' + obj.name + '"]\n';
     }
-    throw new TypeError('Unexpected type: ' + util.toString(obj));
+    return util.toString(obj) + '\n';
   }
 
   var result = {};
