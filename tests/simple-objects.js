@@ -115,7 +115,11 @@ if (util.hasSymbolsSupport) {
 
     t.equal(util.getTestResult(obj, {
       showHidden: true
-    }), 'Object\n└─┬ Key: Symbol(a)\n  └── "a"');
+    }), [
+      'Object',
+      '└─┬ Key: Symbol(a)',
+      '  └── "a"'
+    ].join('\n'));
 
     util.restoreLogger();
   });
