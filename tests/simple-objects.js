@@ -4,7 +4,7 @@ var util = require('./util');
 test('Simple objects test', function (t) {
   util.patchLogger();
 
-  t.plan(10);
+  t.plan(11);
 
   t.equal(util.getTestResult({}), '{}');
 
@@ -80,6 +80,17 @@ test('Simple objects test', function (t) {
       '└─┬ Index: "7"',
       '  └── Infinity'
     ].join('\n'));
+
+  // test with hidden properties of array should show both index and key
+  t.equal(util.getTestResult([1, 2], {showHidden: true}), [
+    'Array',
+    '├─┬ Index: "0"',
+    '│ └── 1',
+    '├─┬ Index: "1"',
+    '│ └── 2',
+    '└─┬ Key: "length"',
+    '  └── 2'
+  ].join('\n'));
 
   util.restoreLogger();
 });

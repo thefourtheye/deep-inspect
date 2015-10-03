@@ -40,11 +40,13 @@ function deepInspect(obj, options, cLevel, pLevel) {
       options, cLevel, pLevel + 1));
   }
 
-  var title = Array.isArray(obj) ? 'Index: ' : 'Key: ';
+  var indexRE = /^["]?\d+["]?$/;
 
   result.nodes = result.nodes.concat(keys.map(function (key) {
+    var fKey = util.format(key);
+    var title = Array.isArray(obj) && indexRE.test(fKey) ? 'Index: ' : 'Key: ';
     return {
-      label: title + util.format(key),
+      label: title + fKey,
       nodes: [deepInspect(obj[key], options, cLevel + 1, pLevel)]
     };
   }));
