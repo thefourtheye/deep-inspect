@@ -29,7 +29,11 @@ function isSymbol(obj) {
 }
 
 function getTypeName(obj) {
-  return toString(obj).replace('[object ', '').replace(']', '');
+  var type = toString(obj).replace('[object ', '').replace(']', '');
+  if (type === 'Function') {
+    return '[Function ' + obj.name + ']';
+  }
+  return type;
 }
 
 // Source: isaacs's core-util-is library
@@ -88,7 +92,7 @@ function format(obj) {
     return isString(obj) ? '"' + obj + '"' : String(obj);
   }
 
-  return toString(obj);
+  return getTypeName(obj);
 }
 
 module.exports = {

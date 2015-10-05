@@ -1,9 +1,11 @@
 var util = require('./util');
 
-function deepInspect(obj, options, cLevel, pLevel) {
+function deepInspect(obj, options, cLevel, pLevel, isParent) {
+  var parent = (isParent ? "[[Parent]] : " : "");
+
   if (util.isPrimitive(obj) || cLevel === options.depth ||
     pLevel === options.parentChainLevel) {
-    return util.format(obj);
+    return parent + util.format(obj);
   }
 
   var keys;
@@ -27,16 +29,16 @@ function deepInspect(obj, options, cLevel, pLevel) {
     if (util.isFunction(obj)) {
       return '[Function "' + obj.name + '"]\n';
     }
-    return util.toString(obj) + '\n';
+    return parent + util.toString(obj) + '\n';
   }
 
   var result = {};
-  result.label = util.getTypeName(obj);
+  result.label = parent + util.getTypeName(obj);
   result.nodes = [];
 
   if (options.parentChainLevel) {
     result.nodes.push(deepInspect(Object.getPrototypeOf(obj),
-      options, 0, pLevel + 1));
+      options, 0, pLevel + 1, true));
   }
 
   var indexRE = /^["]?\d+["]?$/;

@@ -31,7 +31,7 @@ test('Simple objects test', function (t) {
   }), '{}');
 
   t.equal(util.getTestResult(util.patchLogger, {showHidden: true}), [
-    'Function',
+    '[Function patchLogger]',
     '├─┬ Key: "length"',
     '│ └── 0',
     '├─┬ Key: "name"',
@@ -41,16 +41,15 @@ test('Simple objects test', function (t) {
     '├─┬ Key: "caller"',
     '│ └── null',
     '└─┬ Key: "prototype"',
-    '  └── [object Object]'
+    '  └── Object'
   ].join('\n'));
-
 
   t.equal(util.getTestResult(Object.create(null), {
     showHidden: true,
     parentChainLevel: 1
   }), [
     'Object',
-    '└── null'
+    '└── [[Parent]] : null'
   ].join('\n'));
 
   t.equal(util.getTestResult({'': ''}), [
@@ -136,13 +135,13 @@ test('Simple nested objects test', function (t) {
     '├─┬ Index: "0"',
     '│ └── 1',
     '└─┬ Index: "1"',
-    '  └── [object Array]'
+    '  └── Array'
   ].join('\n'));
 
   t.equal(util.getTestResult({1: {2: 3}}), [
     'Object',
     '└─┬ Key: "1"',
-    '  └── [object Object]'
+    '  └── Object'
   ].join('\n'));
 
   t.equal(util.getTestResult([1, [2, 3]], {depth: 2}), [
