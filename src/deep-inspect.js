@@ -47,9 +47,15 @@ function deepInspect(obj, options, cLevel, pLevel, isParent) {
     var fKey = util.format(key);
     var title = Array.isArray(obj) && indexRE.test(fKey) ? 'Index: ' :
       'Key: ';
+    var value;
+    try {
+      value = obj[key];
+    } catch (ex) {
+      value = ex.message;
+    }
     return {
       label: title + fKey,
-      nodes: [deepInspect(obj[key], options, cLevel + 1, pLevel)]
+      nodes: [deepInspect(value, options, cLevel + 1, pLevel)]
     };
   }));
 

@@ -4,7 +4,7 @@ var util = require('./util');
 test('Inherited properties test', function (t) {
   util.patchLogger();
 
-  t.plan(2);
+  t.plan(3);
 
   t.equal(util.getTestResult({}, {
     parentChainLevel: 2
@@ -33,6 +33,42 @@ test('Inherited properties test', function (t) {
     '  │   └── "Parent"',
     '  └─┬ Key: "constructor"',
     '    └── [Function Child]'
+  ].join('\n'));
+
+  t.equal(util.getTestResult(Child, {parentChainLevel: 2, showHidden: true}),[
+    '[Function Child]',
+    '├─┬ [[Parent]] : [Function ]',
+    '│ ├── [[Parent]] : Object',
+    '│ ├─┬ Key: "length"',
+    '│ │ └── 0',
+    '│ ├─┬ Key: "name"',
+    '│ │ └── ""',
+    '│ ├─┬ Key: "arguments"',
+    '│ │ └── "\'caller\' and \'arguments\' are restricted function properties' +
+    ' and cannot be accessed in this context."',
+    '│ ├─┬ Key: "caller"',
+    '│ │ └── "\'caller\' and \'arguments\' are restricted function properties' +
+    ' and cannot be accessed in this context."',
+    '│ ├─┬ Key: "constructor"',
+    '│ │ └── [Function Function]',
+    '│ ├─┬ Key: "bind"',
+    '│ │ └── [Function bind]',
+    '│ ├─┬ Key: "toString"',
+    '│ │ └── [Function toString]',
+    '│ ├─┬ Key: "call"',
+    '│ │ └── [Function call]',
+    '│ └─┬ Key: "apply"',
+    '│   └── [Function apply]',
+    '├─┬ Key: "length"',
+    '│ └── 0',
+    '├─┬ Key: "name"',
+    '│ └── "Child"',
+    '├─┬ Key: "arguments"',
+    '│ └── null',
+    '├─┬ Key: "caller"',
+    '│ └── null',
+    '└─┬ Key: "prototype"',
+    '  └── Object'
   ].join('\n'));
 
   util.restoreLogger();
