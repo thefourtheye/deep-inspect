@@ -23,5 +23,6 @@ module.exports = {
   patchLogger: patchLogger,
   restoreLogger: restoreLogger,
   getTestResult: getTestResult,
-  hasSymbolsSupport: util.hasSymbolsSupport
+  hasSymbolsSupport: util.hasSymbolsSupport,
+  hasArrowFunctions: util.hasArrowFunctions
 };

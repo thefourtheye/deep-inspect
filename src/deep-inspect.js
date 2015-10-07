@@ -27,7 +27,7 @@ function deepInspect(obj, options, cLevel, pLevel, isParent) {
       return '[]\n';
     }
     if (util.isFunction(obj)) {
-      return '[Function "' + obj.name + '"]\n';
+      return '[Function "' + (obj.name || 'Anonymous') + '"]\n';
     }
     return parent + util.toString(obj) + '\n';
   }

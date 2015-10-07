@@ -124,3 +124,15 @@ if (util.hasSymbolsSupport) {
   });
 
 }
+
+if (util.hasArrowFunctions) {
+  test('Simple Arrow Functions test', function (t) {
+    util.patchLogger();
+
+    t.plan(1);
+
+    t.equal(util.getTestResult(() => 1), '[Function "Anonymous"]');
+
+    util.restoreLogger();
+  });
+}

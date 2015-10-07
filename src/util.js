@@ -80,7 +80,7 @@ var hasSymbolsSupport = true;
 try {
   hasSymbolsSupport = typeof Symbol && isFunction(Symbol);
 } catch (ex) {
-  hasSymbolsSupport = !(ex instanceof ReferenceError);
+  hasSymbolsSupport = false;
 }
 
 function format(obj) {
@@ -95,6 +95,14 @@ function format(obj) {
   return getTypeName(obj);
 }
 
+var hasArrowFunctions = true;
+
+try {
+  (new Function('() => 1'))();
+} catch (ex) {
+  hasArrowFunctions = false;
+}
+
 module.exports = {
   toString: toString,
   isObject: isObject,
@@ -106,5 +114,6 @@ module.exports = {
   simpleClone: simpleClone,
   format: format,
   getTypeName: getTypeName,
-  hasSymbolsSupport: hasSymbolsSupport
+  hasSymbolsSupport: hasSymbolsSupport,
+  hasArrowFunctions: hasArrowFunctions
 };
