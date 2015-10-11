@@ -2,7 +2,7 @@ var test = require('tape');
 var util = require('./util');
 
 test.createStream()
-  .pipe(require('tap-spec'))
+  .pipe(require('tap-spec')())
   .pipe(process.stderr);
 
 test('Inherited properties test', function (t) {
