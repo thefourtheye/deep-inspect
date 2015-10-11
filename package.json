@@ -29,6 +29,7 @@
     "eslint": "^1.5.0",
     "istanbul": "^0.3.21",
     "tap": "^1.4.1",
+    "tap-spec": "^4.1.0",
     "tape": "^4.2.0"
   },
   "dependencies": {

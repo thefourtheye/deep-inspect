@@ -1,6 +1,10 @@
 var test = require('tape');
 var util = require('./util');
 
+test.createStream()
+  .pipe(require('tap-spec'))
+  .pipe(process.stderr);
+
 test('Simple nested objects test', function (t) {
   util.patchLogger();
 

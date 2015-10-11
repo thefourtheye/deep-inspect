@@ -1,6 +1,10 @@
 var test = require('tape');
 var util = require('./util');
 
+test.createStream()
+  .pipe(require('tap-spec'))
+  .pipe(process.stderr);
+
 test('primitives are printed as they are', function (t) {
   util.patchLogger();
 
