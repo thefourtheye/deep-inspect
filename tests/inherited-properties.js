@@ -39,10 +39,11 @@ test('Inherited properties test', function (t) {
     Object.getPrototypeOf(fn)['arguments'];
   }
 
-  var restrictedProperties = null;
+  var restrictedProperties = null, restrictedFunctionName = 'Empty';
   try {
     testRestrictedProperties(Child);
   } catch (ex) {
+    restrictedFunctionName = '';
     restrictedProperties = '"\'caller\' and \'arguments\' are restricted ' +
                            'function properties and cannot be accessed in ' +
                            'this context."';
@@ -50,12 +51,12 @@ test('Inherited properties test', function (t) {
 
   t.equal(util.getTestResult(Child, {parentChainLevel: 2, showHidden: true}), [
     '[Function Child]',
-    '├─┬ [[Parent]] : [Function ]',
+    '├─┬ [[Parent]] : [Function ' + restrictedFunctionName + ']',
     '│ ├── [[Parent]] : Object',
     '│ ├─┬ Key: "length"',
     '│ │ └── 0',
     '│ ├─┬ Key: "name"',
-    '│ │ └── ""',
+    '│ │ └── "' + restrictedFunctionName + '"',
     '│ ├─┬ Key: "arguments"',
     '│ │ └── ' + restrictedProperties,
     '│ ├─┬ Key: "caller"',
