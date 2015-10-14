@@ -14,9 +14,10 @@
     "url": "git+https://github.com/thefourtheye/deep-inspect.git"
   },
   "keywords": [
+    "nested",
+    "objects",
     "deep",
-    "inspect",
-    "util"
+    "inspect"
   ],
   "author": "Sakthipriyan Vairamani <thechargingvolcano@gmail.com>",
   "license": "GPL-3.0",
