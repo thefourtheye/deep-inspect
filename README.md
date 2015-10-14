@@ -10,6 +10,43 @@ Status](https://coveralls.io/repos/thefourtheye/deep-inspect/badge.svg?branch=ma
 
     npm install deep-inspect
 
+## Options
+
+The second argument to this function will be an `options` object. It
+accepts the following values. Please note that all are optional fields.
+
+* `showHidden`
+* `depth`
+* `parentChainLevel`
+
+See below for explanations of the options.
+
+### `showHidden`
+
+Setting this option to `true` will show all the enumerable properties of the
+object. Normally, when you iterate an object with a `for..in` loop or with
+`Object.keys`, the non-enumerable properties will not be shown.
+
+This must be a boolean value and the default value is `false`.
+
+### `depth`
+
+If the object is nested structure or the object has many child properties then
+setting this option to a valid positive 32 bit integer value, will list all the
+properties of the nested structure as well, till the level specified by `depth`
+is reached.
+
+This must be a valid 32 bit integer value and the default value is `1`.
+
+### `parentChainLevel`
+
+This option allows to explore the inheritance chain as well. It will go to the
+depth mentioned in `parentChainLevel` and list down all the properties of all
+the objects on the way.
+
+There is no default value, but if not provided this will be ignored and none of
+the parent objects in the prototype chain will be inspected.
+
 ## Usage
 
 ### Inspecting primitives
@@ -41,6 +78,7 @@ inspect({1: '2'});
 ### Inspecting hidden (non-enumerable) properties
 
 ```js
+var inspect = require('deep-inspect');
 var a = {};
 Object.defineProperties(a, {
     one: {enumerable: true,  value: 'one'},
@@ -56,3 +94,27 @@ inspect(a);
 // Object
 // └─┬ Key: "one"
 //   └── "one"
+```
+
+### Inspecting inheritance chain (inherited properties)
+
+```js
+var inspect = require('deep-inspect');
+function Parent() {}
+Parent.prototype.name = 'Parent';
+
+function Child() {}
+Child.prototype = Object.create(Parent.prototype);
+Child.prototype.constructor = Child;
+
+inspect(new Child(), {parentChainLevel: 4});
+// Object
+// └─┬ [[Parent]] : Object
+//   ├─┬ [[Parent]] : Object
+//   │ ├─┬ [[Parent]] : Object
+//   │ │ └── [[Parent]] : null
+//   │ └─┬ Key: "name"
+//   │   └── "Parent"
+//   └─┬ Key: "constructor"
+//     └── [Function Child]
+```
