@@ -6,6 +6,7 @@ Status](https://travis-ci.org/thefourtheye/deep-inspect.svg?branch=master)](http
 [![Coverage
 Status](https://coveralls.io/repos/thefourtheye/deep-inspect/badge.svg?branch=master&service=github)](https://coveralls.io/github/thefourtheye/deep-inspect?branch=master)
 [![npm version](https://badge.fury.io/js/deep-inspect.svg)](https://badge.fury.io/js/deep-inspect)
+[![NPM](https://nodei.co/npm/deep-inspect.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/deep-inspect)
 
 ## Installation
 
