@@ -1,6 +1,6 @@
 {
   "name": "deep-inspect",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Inspect inherited properties. Inspired by Node.js's util",
   "main": "index.js",
   "scripts": {
