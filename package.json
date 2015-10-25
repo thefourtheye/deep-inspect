@@ -2,7 +2,7 @@
   "name": "deep-inspect",
   "version": "0.0.2",
   "description": "Inspect inherited properties. Inspired by Node.js's util",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "lint": "./node_modules/eslint/bin/eslint.js *.js tests/*.js",
     "test": "npm install && npm run lint && npm run cover",
