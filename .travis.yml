@@ -3,7 +3,9 @@ node_js:
   - "0.12"
   - "0.11"
   - "0.10"
-  - "4.0.0"
+  - "4"
+  - "5"
+  - "node"
   - "iojs"
   - "iojs-v3.0.0"
 script: npm run test-on-travis
