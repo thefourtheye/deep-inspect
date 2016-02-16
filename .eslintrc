@@ -1,7 +1,4 @@
 {
-    "ecmaFeatures": {
-        "arrowFunctions": 2
-    },
     "rules": {
         "no-console": 0,
         "indent": [
@@ -23,7 +20,8 @@
         "max-len": [2, 80, 4]
     },
     "env": {
-        "node": true
+        "node": true,
+        "es6": true
     },
     "extends": "eslint:recommended"
 }
