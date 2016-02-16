@@ -78,7 +78,7 @@ function simpleClone(obj, target) {
 var hasSymbolsSupport = true;
 
 try {
-  hasSymbolsSupport = typeof Symbol && isFunction(Symbol);
+  hasSymbolsSupport = typeof Symbol === 'function';
 } catch (ex) {
   hasSymbolsSupport = false;
 }
