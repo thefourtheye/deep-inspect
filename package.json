@@ -27,7 +27,7 @@
   "homepage": "https://github.com/thefourtheye/deep-inspect#readme",
   "devDependencies": {
     "coveralls": "^2.11.16",
-    "eslint": "^3.16.1",
+    "eslint": "^3.19.0",
     "istanbul": "^0.4.5",
     "tap": "^10.2.0",
     "tap-spec": "^4.1.0",
