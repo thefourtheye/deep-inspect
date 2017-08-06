@@ -1,4 +1,6 @@
 # deep-inspect
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/thefourtheye/deep-inspect.svg)](https://greenkeeper.io/)
 A function to inspect inherited properties as well
 
 [![NPM](https://nodei.co/npm/deep-inspect.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/deep-inspect)
